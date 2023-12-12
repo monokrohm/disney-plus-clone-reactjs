@@ -1,39 +1,39 @@
-.App {
-  text-align: center;
+*{
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html{
+    scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+body{
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #151722;
+
+    font-family: Avent-Roman, sans-serif;
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+a{
+    color: white;
+    text-decoration: none;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+@media only screen and (min-width: 768px) {
+    body{
+        font-size: 16px;
+    }
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    body{
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    body{
+        font-size: 14px;
+    }
 }
