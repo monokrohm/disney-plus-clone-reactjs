@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { auth, provider, signInWithPopup } from "../firebase"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { selectUserName, selectUserPhoto, setSignOutState, setUserLoginDetails } from '../features/user/UserSlice';
+import { selectUserName, selectUserPhoto, setSignOutState, setUserLoginDetails } from '../features/UserSlice';
 
 function Header() {
     const dispatch = useDispatch()
@@ -54,7 +54,7 @@ function Header() {
             </Logo>
             {
                 !userName ?
-                    <Login onClick={handleAuth}>Log in</Login> : <>
+                    <LoginButton onClick={handleAuth}>Log in</LoginButton> : <>
                         <NavMenu>
                             <a href="/home">
                                 <img src='./images/home-icon.svg' alt="" />
@@ -189,7 +189,7 @@ const NavMenu = styled.div`
     }
 `
 
-const Login = styled.a`
+const LoginButton = styled.a`
     padding: 9px 15px; 
     border-radius: 5px;
     border: 1px solid white;

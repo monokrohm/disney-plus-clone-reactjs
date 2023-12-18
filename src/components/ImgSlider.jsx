@@ -51,7 +51,7 @@ const Carousel = styled(Slider)`
     ul li button {
         position: absolute;
         bottom: 40px;
-        left: 35vw;
+        left: 40vw;
 
         &:before {
             font-size: 10px;
@@ -65,6 +65,18 @@ const Carousel = styled(Slider)`
 
     .slick-list {
         overflow: visible;
+    }
+
+    @media (max-width: 769px){
+        ul li button {
+            left: 30vw;
+        }
+    }
+
+    @media (min-width: 770px) and (max-width: 1350px){
+        ul li button {
+            left: 35vw;
+        }
     }
 `
 

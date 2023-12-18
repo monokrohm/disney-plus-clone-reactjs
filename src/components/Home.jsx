@@ -8,8 +8,8 @@ import Originals from './Originals'
 import Trending from './Trending'
 import db from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMovies } from '../features/movie/MovieSlice'
-import { selectUserName } from '../features/user/UserSlice'
+import { setMovies } from '../features/MovieSlice'
+import { selectUserName } from '../features/UserSlice'
 import { onValue, ref } from "firebase/database"
 
 //import { collection, docs, onSnapshot, getDoc } from 'firebase/firestore'
