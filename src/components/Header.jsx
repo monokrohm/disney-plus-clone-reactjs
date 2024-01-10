@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { auth, provider, signInWithPopup } from "../firebase"
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { selectUserName, selectUserPhoto, setSignOutState, setUserLoginDetails } from '../features/UserSlice';
+import { useNavigate, Link } from "react-router-dom";
+import { selectUserName, selectUserPhoto, setSignOutState, setUserLoginDetails } from '../features/userSlice';
 
 function Header() {
     const dispatch = useDispatch()
@@ -56,30 +56,30 @@ function Header() {
                 !userName ?
                     <LoginButton onClick={handleAuth}>Log in</LoginButton> : <>
                         <NavMenu>
-                            <a href="/home">
+                            <Link to="/home">
                                 <img src='./images/home-icon.svg' alt="" />
                                 <span>HOME</span>
-                            </a>
-                            <a href="/home">
+                            </Link>
+                            <Link to="/home">
                                 <img src='./images/search-icon.svg' alt="" />
                                 <span>SEARCH</span>
-                            </a>
-                            <a href="/home">
+                            </Link>
+                            <Link to="/home">
                                 <img src='./images/watchlist-icon.svg' alt="" />
                                 <span>WATCHLIST</span>
-                            </a>
-                            <a href="/home">
+                            </Link>
+                            <Link to="/home">
                                 <img src='./images/original-icon.svg' alt="" />
                                 <span>ORIGINALS</span>
-                            </a>
-                            <a href="/home">
+                            </Link>
+                            <Link to="/home">
                                 <img src='./images/movie-icon.svg' alt="" />
                                 <span>MOVIES</span>
-                            </a>
-                            <a href="/home">
+                            </Link>
+                            <Link to="/home">
                                 <img src='./images/series-icon.svg' alt="" />
                                 <span>SERIES</span>
-                            </a>
+                            </Link>
                         </NavMenu>
                         <SignOut>
                             <UserImg src={userPhoto} />
@@ -121,6 +121,7 @@ const Logo = styled.a`
     img{
         display: block;
         width: 100%;
+        // transform: scaleX(-1);
     }
 `
 
@@ -211,6 +212,7 @@ const UserImg = styled.img`
 `
 
 const DropDownMenu = styled.div`
+    display: none;
     position: absolute;
     top: 48px;
     right: 0px;
@@ -223,7 +225,6 @@ const DropDownMenu = styled.div`
     font-size: 15px;
     letter-spacing: 3px;
     text-wrap: nowrap;
-    opacity: 0;
 `
 
 const SignOut = styled.div`
@@ -243,8 +244,7 @@ const SignOut = styled.div`
 
     &:hover{
         ${DropDownMenu} {
-            opacity: 1;
-            transition-duration: 1s;
+            display: initial;
         }
     }
 `

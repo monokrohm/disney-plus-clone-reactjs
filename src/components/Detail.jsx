@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import db from '../firebase'
-import { onValue, ref } from 'firebase/database'
+import db, { collection, doc, getDocs, getDoc } from '../firebase'
 
 function Detail() {
     const { id } = useParams()
     const [detailData, setDetailData] = useState({})
 
-    const movieRef = ref(db, "movies")
     useEffect(() => {
-        onValue(movieRef, (snapshot) => {
-            const data = snapshot.val()
-            // console.log(data)
-            if (data.length > 0) {
-                setDetailData(data[id])
+        getDoc(doc(db, `movies/${id}`)).then((snapshot) => {
+            const data = snapshot.data()
+            if (data) {
+                setDetailData(data)
             } else {
                 console.log("No data in firebase")
             }

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectOriginals } from '../features/MovieSlice'
+import { selectOriginals } from '../features/movieSlice'
 
 function Originals() {
     const movies = useSelector(selectOriginals)

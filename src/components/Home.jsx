@@ -6,13 +6,10 @@ import Recommended from './Recommended'
 import NewToDisney from './NewToDisney'
 import Originals from './Originals'
 import Trending from './Trending'
-import db from '../firebase'
+import db, { collection, getDocs } from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMovies } from '../features/MovieSlice'
-import { selectUserName } from '../features/UserSlice'
-import { onValue, ref } from "firebase/database"
-
-//import { collection, docs, onSnapshot, getDoc } from 'firebase/firestore'
+import { setMovies } from '../features/movieSlice'
+import { selectUserName } from '../features/userSlice'
 
 function Home() {
     const dispatch = useDispatch()
@@ -22,24 +19,25 @@ function Home() {
     let originals = []
     let trending = []
 
-    const movieRef = ref(db, "movies")
     useEffect(() => {
-        onValue(movieRef, (snapshot) => {
-            const data = snapshot.val()
-            //console.log(data)
-            Object.keys(data).forEach((key) => {
-                switch (data[key].type) {
+        getDocs(collection(db, "movies")).then((querySnapshot => {
+            const movies = {};
+            querySnapshot.docs.forEach((movieDocs) => {
+                movies[movieDocs.id] = movieDocs.data();
+            })
+            Object.keys(movies).forEach((key) => {
+                switch (movies[key].type) {
                     case "recommend":
-                        recommended = [...recommended, { id: key, ...data[key] }]
+                        recommended = [...recommended, { id: key, ...movies[key] }]
                         break
                     case "new":
-                        newToDisney = [...newToDisney, { id: key, ...data[key] }]
+                        newToDisney = [...newToDisney, { id: key, ...movies[key] }]
                         break
                     case "original":
-                        originals = [...originals, { id: key, ...data[key] }]
+                        originals = [...originals, { id: key, ...movies[key] }]
                         break
                     case "trending":
-                        trending = [...trending, { id: key, ...data[key] }]
+                        trending = [...trending, { id: key, ...movies[key] }]
                         break
                 }
             })
@@ -49,7 +47,7 @@ function Home() {
                 originals: originals,
                 trending: trending
             }))
-        })
+        }))
     }, [userName])
 
     return (
